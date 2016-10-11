@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+  <title>the5fire-backbone-model</title>
+ </head>
+ <body>
+ <div style="width: 100px; height: 100px; background: blue;" id="box">
+ 	
+ </div>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+  <script>
+  /*(function ($) {    
+  	var Man = Backbone.Model.extend({
+  		initialize: function (){
+  			alert('Hey, you create me!');
+  		}
+  	})
+  	var man = new Man;
+
+  })(jQuery);*/
+  $(function (){
+  	var Man = Backbone.Model.extend({
+  		initialize: function (){
+  			alert('Hey, you create me!');
+  			this.bind('change:name',function (){
+  				var name = this.get('name');
+  				alert('你更改name为'+name)
+  			})
+  			this.bind('change:age',function (){
+  				var age = this.get('age');
+  				alert('年齡改為'+age)
+  			})
+  			this.bind('invalid',function (model,err){
+  				alert(err);
+  			})
+  		},
+  		defaults: {
+  			name: 'hahaha',
+  			age: 18
+  		},
+  		aboutMe: function (){
+  			console.log('我叫'+this.get('name')+',我今年'+this.get('age')+'了！')
+  		},
+  		validat: function (attr){
+  			if(attr.name == ''){
+  				return 'name不能为空！'
+  			}
+  		}
+  	})
+  	var man = new Man;
+  	man.aboutMe();
+  	man.set({name: ''});
+  	man.save();
+  	// man.set({name: 'aaaaa'})
+  	$('#box').on('click',function (){
+  		var age = man.get('age');
+  		age++;
+  		 man.set({age: age})
+  	})
+  	/*console.log('姓名:'+man.get('name')+'，年龄'+man.get('age'));*/
+
+  	/*var Otherman = Backbone.Model.extend({
+  		initialize: function (){
+  			alert('另一个人');
+  		}
+  	})
+  	var otherman = new Otherman;
+  	otherman.set({
+  		name: 'aaaa',
+  		age: 20
+  	})
+  	console.log(otherman)*/
+  })
+  
+   </script>
+ </body>
+</html>

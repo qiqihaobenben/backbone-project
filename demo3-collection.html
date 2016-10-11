@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+  <title>the5fire-backbone-model</title>
+ </head>
+ <body>
+ <div style="width: 100px; height: 100px; background: red;" id="box">
+ 	
+ </div>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+  <script>
+  
+  $(function (){
+  	var Book = Backbone.Model.extend({
+      defaults: {
+        title: ''
+      },
+      initialize: function (){
+
+      }
+    })
+
+    var Bookshelf = Backbone.Collection.extend({
+      model: Book
+    })
+    var book1 = new Book({title: 'book1'})
+    var book2 = new Book({title: 'book2'})
+    var book3 = new Book({title: 'book3'})
+    var bookshelf = new Bookshelf;
+    bookshelf.add(book1)
+    bookshelf.add(book2)
+    bookshelf.add(book3)
+    bookshelf.each(function (book,i){
+      console.log(book.get('title'),i)
+    })
+    $('#box').on('click',function (){
+      bookshelf.remove(book2);
+      bookshelf.each(function (book,i){
+      console.log(book.get('title'),i)
+    })
+    })
+
+  })
+  
+   </script>
+ </body>
+</html>
