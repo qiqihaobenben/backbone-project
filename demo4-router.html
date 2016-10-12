@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+  <title>the5fire-backbone-model</title>
+ </head>
+ <body>
+ <div style="width: 100px; height: 100px; background: red;" id="box">
+ 	
+ </div>
+ <a href="#/posts/lalala/actions">testActions</a>
+ <a href="#/posts/404">testActions</a>
+ <a href="#/download/user/images/hey.gif">download gif</a>
+ <a href="#dashboard/graph">Load Route/Action View</a>
+ <a href="#manual">manual</a>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+  <script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+  <script>
+
+  $(function (){
+    // var AppRouter = Backbone.Router.extend({
+    //   routes: {'*actions':'defaultRouter'}
+    //   ,defaultRouter: function (actions){
+    //     alert(actions)
+    //   }
+    // })
+    var AppRouter = Backbone.Router.extend({
+
+    routes: { 
+    //下面对应的链接为<a href="#/posts/lalala">testActions</a>     
+    "posts/:id" : "getPost",        
+    //下面对应的链接为<a href="#/download/user/images/hey.gif">download gif</a>
+        "download/*path": "downloadFile",        
+        //下面对应的链接为<a href="#/dashboard/graph">Load Route/Action View</a>
+        ":route/:action": "loadView",        
+        "*actions" : "defaultRoute",
+        "manual":"manual"
+    },
+
+    getPost: function(id) {
+        alert(id);
+    },
+
+    defaultRoute : function(actions){
+        alert(actions);
+    },
+
+    downloadFile: function( path ){
+        alert(path); // user/images/hey.gif
+    },
+
+    loadView: function( route, action ){
+        alert(route + "_" + action); // dashboard_graph
+    },
+    manual: function() {
+    alert("111111111111");
+    // app_router.navigate("/posts/" + 404, {trigger: true, replace: true});
+}
+
+});
+    var router = new AppRouter;
+    Backbone.history.start();
+  })
+  
+   </script>
+ </body>
+</html>
